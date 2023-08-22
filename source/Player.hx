@@ -11,7 +11,7 @@ import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
 import lime.math.Vector2;
 #if android
-import android.FlxVirtualPad;
+import android.SonicVPad;
 #end
 
 class Player extends FlxTypedSpriteGroup<FlxSprite>
@@ -25,7 +25,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var curGround:FlxSprite;
 	public var camPos:FlxObject;
 	#if android
-	public var virtualPad:FlxVirtualPad;
+	public var virtualPad:SonicVPad;
 	#end
 	public var animationStuff:Array<Dynamic> = [
 		["idle", [0], 12],
@@ -36,7 +36,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	//all the movement stuff
 	public var horiSPEED:Float = 0;
 	public var vertSPEED:Float = 0;
-	public var currentGRDSpeed:Float = 0;
+	public var currentGRDSpeed:Float = 30;
 	public var currentGRDAngle:Float = 0;
 
 	public var accelerationSpeed:Float = 0.046875;
@@ -51,7 +51,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 
 	//vectorz
 
-	public function new(x:Float, y:Float)
+	public function new(x:Float, y:Float, char:String)
 	{
 		super(x, y);
 
@@ -96,7 +96,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 				camPos.y -= elapsed / 3.2;
 				hasLookedUp = true;
 				if (camPos.y <= tgrtY)
-l				{
+				{
 					camPos.y = trgtY;
 				}
 			});
