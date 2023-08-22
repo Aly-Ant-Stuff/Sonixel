@@ -83,7 +83,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			direction = -1;
 		}
 
-		if (FlxG.keys.pressed(LEFT)) {
+		if (FlxG.keys.pressed(RIGHT) #if android || virtualPad.buttonRight.pressed #end) {
 			horiSPEED = Math.max(0, 5) * (elapsed/1.9); //pra ser mais devagar
 			direction = 1;
 		}
@@ -102,11 +102,11 @@ l				{
 			});
 		} else {
 			if (hasLookedUp) {
-				var trgtY = camPos.y + 400;
+				var trgtY = defaultCamPos.y;
 				camPos.y += elapsed / 3.2;
 				if (camPos.y >= tgrtY)
 				{
-					camPos.y = defaultCamPos.y;
+					camPos.y = trgtY;
 				}
 			}
 		}
