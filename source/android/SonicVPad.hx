@@ -11,19 +11,78 @@ import flash.display.BitmapData;
 import flixel.graphics.FlxGraphic;
 import openfl.utils.ByteArray;
 
-class FlxVirtualPad extends FlxSpriteGroup
+class SonicVPad extends FlxSpriteGroup
 {
-	public var buttonA:FlxButton;
-	public var buttonB:FlxButton;
-	public var buttonC:FlxButton;
-	public var buttonY:FlxButton;
-	public var buttonX:FlxButton;
+	var base:Array<Dynamic> = [
+		{
+			tag: "base",
+			region: FlxPoint.get(0, 0),
+			size: FlxPoint.get(35, 37)
+		},
+		{
+			tag: "base-completlyPressed",
+			region: FlxPoint.get(35, 0),
+			size: FlxPoint.get(35, 37)
+		},
+	];
+	var dpadS:Array<Dynamic> = [
+		//directional buttons
+		//left
+		{
+			tag: "leftNormal",
+			region: FlxPoint.get(70, 12),
+			size: FlxPoint.get(12, 5)
+		},
+		{
+			tag: "leftCheck",
+			region: FlxPoint.get(70, 0),
+			size: FlxPoint.get(12, 5)
+		},
+		//right
+		{
+			tag: "rightNormal",
+			region: FlxPoint.get(87, 12),
+			size: FlxPoint.get(12, 5)
+		},
+		{
+			tag: "rightCheck",
+			region: FlxPoint.get(87, 0),
+			size: FlxPoint.get(12, 5)
+		},
+		//down
+		{
+			tag: "downNormal",
+			region: FlxPoint.get(82, 12),
+			size: FlxPoint.get(5, 12)
+		},
+		{
+			tag: "downCheck",
+			region: FlxPoint.get(82, 0),
+			size: FlxPoint.get(5, 12)
+		},
+		//up
+		{
+			tag: "downNormal",
+			region: FlxPoint.get(82, 12),
+			size: FlxPoint.get(5, 12)
+		},
+		{
+			tag: "downCheck",
+			region: FlxPoint.get(82, 0),
+			size: FlxPoint.get(5, 12)
+		}
+	];
+	//actions
+	public var actions:FlxSpriteGroup;
+	public var buttonJump:FlxButton;
+	public var buttonPause:FlxButton;
+
+	//directionals
+	public var dPad:FlxSpriteGroup;
 	public var buttonLeft:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
 	public var buttonDown:FlxButton;
-	public var dPad:FlxSpriteGroup;
-	public var actions:FlxSpriteGroup;
 
 	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode)
 	{
