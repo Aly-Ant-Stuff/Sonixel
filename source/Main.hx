@@ -7,7 +7,7 @@ import openfl.display.Sprite;
 
 class Main extends Sprite
 {
-	public static var game = [
+	public static var game:Array<Dynamic> = [
 		1280, 720, //resolution
 		PlayState, //state
 		90, //framerate
