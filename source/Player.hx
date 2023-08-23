@@ -48,10 +48,12 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	//actions
 	public var hasLookedUp:Bool = false;
 	public var defaultCamPos:FlxPoint = FlxPoint.get(0, 0);
+	public var isGrounded:Bool = true;
+	public var isColliding:Bool = false;
 
 	//vectorz
 
-	public function new(x:Float, y:Float, char:String)
+	public function new(x:Float, y:Float, ?char:String)
 	{
 		super(x, y);
 
@@ -79,12 +81,14 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		y += vertSPEED * FlxMath.signOf(direction);
 
 		if (FlxG.keys.pressed(LEFT) #if android || virtualPad.buttonLeft.pressed #end) {
-			horiSPEED = Math.max(0, -5) * (elapsed/1.9); //pra ser mais devagar
+			horiSPEED = (elapsed/1.9); //pra ser mais devagar
+			if (horiSPEED >= 5) horiSPEED = 5;
 			direction = -1;
 		}
 
 		if (FlxG.keys.pressed(RIGHT) #if android || virtualPad.buttonRight.pressed #end) {
-			horiSPEED = Math.max(0, 5) * (elapsed/1.9); //pra ser mais devagar
+			horiSPEED = (elapsed/1.9); //pra ser mais devagar
+			if (horiSPEED >= 5) horiSPEED = 5;
 			direction = 1;
 		}
 
@@ -110,6 +114,9 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 				}
 			}
 		}
+
+		FlxG.watch.addQuick("char speed in x", horiSPEED);
+		FlxG.watch.addQuick("char speed in y", vertSPEED);
 
 		super.update(elapsed);
 	}
