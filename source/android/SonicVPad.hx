@@ -91,20 +91,13 @@ class SonicVPad extends FlxSpriteGroup
 		super();
 		scrollFactor.set();
 
-		if (DPad == null)
-			DPad = FULL;
-
-		if (Action == null)
-			Action = A_B_C;
-
 		dPad = new FlxSpriteGroup();
 		dPad.scrollFactor.set();
-		dPad.add(add(buttonJump = createButton()))
 
 		actions = new FlxSpriteGroup();
 		actions.scrollFactor.set();
 
-
+		dPad.add(add(buttonJump = createButton()));
 	}
 
 	override public function destroy():Void
@@ -127,8 +120,10 @@ class SonicVPad extends FlxSpriteGroup
 	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?OnClick:Void->Void):FlxButton
 	{
 		var button = new FlxButton(X, Y);
-		var frame = getVirtualInputFrames().getByName(Graphic);
-		button.frames = FlxTileFrames.fromFrame(frame, FlxPoint.get(Width, Height));
+		for (anim in buttons)
+		{
+			frames = FlxTileFrames.findFrame();
+		}
 		button.resetSizeFromFrame();
 		button.solid = false;
 		button.immovable = true;
