@@ -22,6 +22,9 @@ class PlayState extends FlxState
 		FlxCamera.defaultCameras = [camGame];
 		camGame.bgColor = FlxColor.GRAY;
 
+		camPos = new FlxObject(0, 0, 1, 1);
+		add(camPos);
+
 		player = new Player(500, 500);
 		player.pCam = this.camGame;
 		player.camPos = this.camPos;
