@@ -102,7 +102,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 				hasLookedUp = true;
 				if (camPos.y <= tgrtY)
 				{
-					camPos.y = trgtY;
+					camPos.y = tgrtY;
 				}
 			});
 		} else {
