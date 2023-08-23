@@ -117,8 +117,6 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 
 		FlxG.watch.addQuick("char speed in x", horiSPEED);
 		FlxG.watch.addQuick("char speed in y", vertSPEED);
-
-		super.update(elapsed);
 	}
 
 	function indicesIterator(start:Int, end:Int):Array<Int> {
