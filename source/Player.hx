@@ -58,7 +58,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	{
 		super(x, y);
 
-		spr = new FlxSprite().loadGraphic("assets/images/sonic.png", true, 46, 52);
+		spr = new FlxSprite().loadGraphic("assets/images/Sonic.png", true, 46, 52);
 		for (i in 0...animationStuff.length)
 			spr.animation.add(animationStuff[i][0], animationStuff[i][1], animationStuff[i][2]);
 		spr.antialiasing = false;
