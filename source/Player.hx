@@ -92,7 +92,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			direction = 1;
 		}
 
-		if (FlxG.keys.pressed(UP))
+		if (FlxG.keys.pressed(UP) #if android || virtualPad.buttonUp.pressed #end)
 		{
 			spr.animation.play("lookUp");
 			new FlxTimer().start(2, function(t:FlxTimer) {
