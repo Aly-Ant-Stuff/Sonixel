@@ -132,8 +132,13 @@ class SonicVPad extends FlxSpriteGroup
 		actions = new FlxSpriteGroup();
 		actions.scrollFactor.set();
 
+		dPad.add(add(createButton(89, 449, 'base', false)));
 		dPad.add(add(buttonLeft = createButton(89, FlxG.height - 536, 'left')));
 		dPad.add(add(buttonRight = createButton(89, FlxG.height - 536, 'right')));
+
+		//actions
+		actions.add(add(buttonJump = createButton(1084, 522, 'jump')));
+		actions.ads(add(buttonPause = createButton()));
 
 		dPad.scale.set(4.84, 4.84);
 		actions.scale.set(4.84, 4.84);
