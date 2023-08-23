@@ -17,8 +17,8 @@ typedef SpriteSheetStruct = {
 	var name:String;
 	var x:Float;
 	var y:Float;
-	var w:Float,
-	var h:Float,
+	var w:Float;
+	var h:Float;
 }
 class SonicVPad extends FlxSpriteGroup
 {
