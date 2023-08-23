@@ -135,8 +135,8 @@ class SonicVPad extends FlxSpriteGroup
 		dPad.add(add(buttonLeft = createButton(89, FlxG.height - 536, 'left')));
 		dPad.add(add(buttonRight = createButton(89, FlxG.height - 536, 'right')));
 
-		dPad.scale.set(3.84, 3.84);
-		actions.scale.set(3.84, 3.84);
+		dPad.scale.set(4.84, 4.84);
+		actions.scale.set(4.84, 4.84);
 	}
 
 	override public function destroy():Void
