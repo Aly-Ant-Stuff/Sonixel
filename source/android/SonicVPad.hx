@@ -14,7 +14,7 @@ import openfl.utils.ByteArray;
 
 class SonicVPad extends FlxSpriteGroup
 {
-	//base pad
+	//base pad - 3.94
 	var base:Array<Dynamic> = [
 		{
 			tag: "base",
@@ -98,7 +98,7 @@ class SonicVPad extends FlxSpriteGroup
 		actions = new FlxSpriteGroup();
 		actions.scrollFactor.set();
 
-		dPad.add(add(buttonJump = createButton()));
+		dPad.add(add(buttonLeft = createButton(89, FlxG.height - 536, 67, 29, 'left')));
 	}
 
 	override public function destroy():Void
@@ -126,7 +126,9 @@ class SonicVPad extends FlxSpriteGroup
 			var bitmapData = new GraphicVirtualInput(0, 0);
 			button.frames = FlxTileFrames.fromGraphic(FlxGraphic.fromBitmapData(bitmapData), anim.size, anim.region);
 		}
+		if (button.frames != null) button.animation.play(graphic + "Normal");
 		button.resetSizeFromFrame();
+		button.antialiasing = false;
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
@@ -136,7 +138,13 @@ class SonicVPad extends FlxSpriteGroup
 		#end
 
 		if (OnClick != null)
+		{
 			button.onDown.callback = OnClick;
+			onClick = function()
+			{
+				if (button.frames != null) button.animation.play(graphic + 'Check');
+			};
+		}
 
 		return button;
 	}
