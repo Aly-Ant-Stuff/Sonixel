@@ -82,7 +82,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 
 		if (FlxG.keys.pressed(LEFT) #if android || virtualPad.buttonLeft.pressed #end) {
 			horiSPEED = (elapsed/1.9); //pra ser mais devagar
-			if (horiSPEED >= 5) horiSPEED = 5;
+			if (horiSPEED >= -5) horiSPEED = -5;
 			direction = -1;
 		}
 
