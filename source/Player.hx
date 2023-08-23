@@ -81,19 +81,19 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		x += horiSPEED * FlxMath.signOf(direction);
 		y += vertSPEED * FlxMath.signOf(direction);
 
-		if (FlxG.keys.pressed(LEFT) #if android || virtualPad.buttonLeft.pressed #end) {
+		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			horiSPEED = (elapsed/1.9); //pra ser mais devagar
 			if (horiSPEED >= -5) horiSPEED = -5;
 			direction = -1;
 		}
 
-		if (FlxG.keys.pressed(RIGHT) #if android || virtualPad.buttonRight.pressed #end) {
+		if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
 			horiSPEED = (elapsed/1.9); //pra ser mais devagar
 			if (horiSPEED >= 5) horiSPEED = 5;
 			direction = 1;
 		}
 
-		if (FlxG.keys.pressed(UP) #if android || virtualPad.buttonUp.pressed #end)
+		if (FlxG.keys.pressed.UP #if android || virtualPad.buttonUp.pressed #end)
 		{
 			spr.animation.play("lookUp");
 			new FlxTimer().start(2, function(t:FlxTimer) {
