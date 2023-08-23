@@ -97,21 +97,21 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		{
 			spr.animation.play("lookUp");
 			new FlxTimer().start(2, function(t:FlxTimer) {
-				var tgrtY:Float = camPos.y - 400;
+				var targetY:Float = camPos.y - 400;
 				camPos.y -= elapsed / 3.2;
 				hasLookedUp = true;
-				if (camPos.y <= tgrtY)
+				if (camPos.y <= targetY)
 				{
-					camPos.y = tgrtY;
+					camPos.y = targetY;
 				}
 			});
 		} else {
 			if (hasLookedUp) {
-				var trgtY = defaultCamPos.y;
+				var targetY = defaultCamPos.y;
 				camPos.y += elapsed / 3.2;
-				if (camPos.y >= tgrtY)
+				if (camPos.y >= targetY)
 				{
-					camPos.y = trgtY;
+					camPos.y = targetY;
 				}
 			}
 		}
