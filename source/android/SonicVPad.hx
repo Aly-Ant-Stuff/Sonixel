@@ -11,87 +11,102 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flash.display.BitmapData;
 import flixel.graphics.FlxGraphic;
 import openfl.utils.ByteArray;
+import openfl.geom.Rectangle;
 
+typedef SpriteSheetStruct = {
+	var name:String;
+	var x:Float;
+	var y:Float;
+	var w:Float,
+	var h:Float,
+}
 class SonicVPad extends FlxSpriteGroup
 {
 	//base pad - 3.94
-	var base:Array<Dynamic> = [
-		{
-			tag: "base",
-			region: FlxRect.get(0, 0),
-			size: FlxPoint.get(35, 37)
-		},
-		{
-			tag: "base-completlyPressed",
-			region: FlxRect.get(35, 0),
-			size: FlxPoint.get(35, 37)
-		},
-	];
-
 	//directional buttons
-	var dpadS:Array<Dynamic> = [
-		//left
+	var spriteSheet:Array<SpriteSheetStruct> = [
+		///////////////////
 		{
-			tag: "leftNormal",
-			region: FlxRect.get(70, 12),
-			size: FlxPoint.get(12, 5)
+			name: "base",
+			x: 0,
+			y: 0,
+			w: 35, 
+			h: 37
 		},
 		{
-			tag: "leftCheck",
-			region: FlxRect.get(70, 0),
-			size: FlxPoint.get(12, 5)
+			name: "baseCheck",
+			x: 35,
+			y: 0,
+			w: 35,
+			h: 37
 		},
-		//right
+		///////////////
 		{
-			tag: "rightNormal",
-			region: FlxRect.get(87, 12),
-			size: FlxPoint.get(12, 5)
-		},
-		{
-			tag: "rightCheck",
-			region: FlxRect.get(87, 0),
-			size: FlxPoint.get(12, 5)
-		},
-		//down
-		{
-			tag: "downNormal",
-			region: FlxRect.get(82, 12),
-			size: FlxPoint.get(5, 12)
+			name: "leftNormal",
+			x: 70,
+			y: 12,
+			w: 12,
+			h: 5
 		},
 		{
-			tag: "downCheck",
-			region: FlxRect.get(82, 0),
-			size: FlxPoint.get(5, 12)
+			name: "leftCheck",
+			x: 70, y: 0,
+			w: 12, h: 5
 		},
-		//up
+		/////////////
 		{
-			tag: "upNormal",
-			region: FlxRect.get(99, 12),
-			size: FlxPoint.get(5, 12)
-		},
-		{
-			tag: "upCheck",
-			region: FlxRect.get(99, 0),
-			size: FlxPoint.get(5, 12)
-		}
-	];
-
-	var actionButtons:Array<Dynamic> = [
-		//a
-		{
-			tag: "aNormal",
-			region: FlxRect.get(106, 0),
-			size: FlxPoint.get(23, 23)
+			name: "rightNormal",
+			x: 87, y: 12,
+			w: 12, h: 5
 		},
 		{
-			tag: "aCheck",
-			region: FlxRect.get(106, 24),
-			size: FlxPoint.get(23, 23)
+			name: "rightCheck",
+			x: 87, y: 0,
+			w: 12, h: 5
+		},
+		//////////
+		{
+			name: "downNormal",
+			x: 82, y: 12,
+			w: 5, h: 12
 		},
 		{
-			tag: "pauseNormal",
-			region: FlxRect.get(106, 24),
-			size: FlxPoint.get(23, 23)
+			name: "downCheck",
+			x: 82, y: 0,
+			w: 5, h: 12
+		},
+		/////////////
+		{
+			name: "upNormal",
+			x: 99, y: 12,
+			w: 5, h: 12
+		},
+		{
+			name: "upCheck",
+			x: 99, y: 0,
+			w: 5, h: 12
+		},
+		//////////
+		{
+			name: "jumpNormal",
+			x: 106, y: 0,
+			w: 23, h: 23
+		},
+		{
+			name: "jumpCheck",
+			x: 106, y: 24,
+			w: 23, h: 23
+		},
+		/////////////////
+		{
+			name: "pauseNormal",
+			x: 129, y: 0,
+			w: 9, h: 8
+		},
+		{
+			name: "pauseCheck",
+			x: 129, y: 0,
+			w: 9, h: 8
 		}
 	];
 	//actions
@@ -141,13 +156,14 @@ class SonicVPad extends FlxSpriteGroup
 	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?OnClick:Void->Void):FlxButton
 	{
 		var button = new FlxButton(X, Y);
-		for (anim in buttons)
+		var framesTile:FlxAtlasFrames = FlxAtlasFrames.findFrame(FlxGraphic.fromBitmapData(new GraphicVirtualInput(0, 0)));
+		framesTile = new FlxAtlasFrames(FlxGraphic.fromBitmapData(new GraphicVirtualInput(0, 0)));
+		for (index in 2...spriteSheet.length)
 		{
-			var bitmapData = new GraphicVirtualInput(0, 0);
-			button.frames += FlxTileFrames.fromGraphic(FlxGraphic.fromBitmapData(bitmapData), anim.size, anim.region);
+			var sprite = spriteSheet[index];
+			var rect:FlxRect = FlxRect.get(sprite.x, sprite.y, sprite.w, sprite.h);
+			framesTile.addAtlasFrame(rect);
 		}
-		if (button.frames != null && Graphic != 'pause') button.animation.play(graphic + "Normal");
-		else if (Graphic == 'pause') button.animation.play("pauseNormal");
 		button.resetSizeFromFrame();
 		button.antialiasing = false;
 		button.solid = false;
@@ -162,7 +178,7 @@ class SonicVPad extends FlxSpriteGroup
 		if (onClick == null) {
 			onClick = function()
 			{
-				if (button.frames != null && Graphic != null) button.animation.play(graphic + 'Check');
+				if (button.frames != null && Graphic != 'pause') button.animation.play(graphic + 'Check');
 			};
 		}
 
