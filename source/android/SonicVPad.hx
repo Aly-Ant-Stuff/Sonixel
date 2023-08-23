@@ -187,9 +187,9 @@ class SonicVPad extends FlxSpriteGroup
 		#end
 
 		button.onDown.callback = OnClick;
-		if (onClick == null) {
+		if (OnClick == null) {
 			if (clickable)
-				onClick = function()
+				OnClick = function()
 				{
 					button.animation.play(graphic + 'Check');
 				};
