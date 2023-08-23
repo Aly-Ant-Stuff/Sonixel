@@ -13,6 +13,7 @@ import openfl.utils.ByteArray;
 
 class SonicVPad extends FlxSpriteGroup
 {
+	//base pad
 	var base:Array<Dynamic> = [
 		{
 			tag: "base",
@@ -25,8 +26,9 @@ class SonicVPad extends FlxSpriteGroup
 			size: FlxPoint.get(35, 37)
 		},
 	];
+
+	//directional buttons
 	var dpadS:Array<Dynamic> = [
-		//directional buttons
 		//left
 		{
 			tag: "leftNormal",
@@ -62,13 +64,13 @@ class SonicVPad extends FlxSpriteGroup
 		},
 		//up
 		{
-			tag: "downNormal",
-			region: FlxPoint.get(82, 12),
+			tag: "upNormal",
+			region: FlxPoint.get(99, 12),
 			size: FlxPoint.get(5, 12)
 		},
 		{
-			tag: "downCheck",
-			region: FlxPoint.get(82, 0),
+			tag: "upCheck",
+			region: FlxPoint.get(99, 0),
 			size: FlxPoint.get(5, 12)
 		}
 	];
@@ -84,7 +86,7 @@ class SonicVPad extends FlxSpriteGroup
 	public var buttonRight:FlxButton;
 	public var buttonDown:FlxButton;
 
-	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode)
+	public function new()
 	{
 		super();
 		scrollFactor.set();
@@ -97,6 +99,7 @@ class SonicVPad extends FlxSpriteGroup
 
 		dPad = new FlxSpriteGroup();
 		dPad.scrollFactor.set();
+		dPad.add(add(buttonJump = createButton()))
 
 		actions = new FlxSpriteGroup();
 		actions.scrollFactor.set();
