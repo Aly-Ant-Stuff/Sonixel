@@ -19,7 +19,7 @@ class PlayState extends FlxState
 	{
 		camGame = new FlxCamera();
 		FlxG.cameras.reset(camGame);
-		FlxG.cameras.defaultCameras = [camGame];
+		FlxCamera.defaultCameras = [camGame];
 		camGame.bgColor = FlxColor.GRAY;
 
 		player = new Player(500, 500);
