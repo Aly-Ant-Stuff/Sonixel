@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.graphics.frames.FlxTileFrames;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.util.FlxDestroyUtil;
 import flixel.ui.FlxButton;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -17,12 +18,12 @@ class SonicVPad extends FlxSpriteGroup
 	var base:Array<Dynamic> = [
 		{
 			tag: "base",
-			region: FlxPoint.get(0, 0),
+			region: FlxRect.get(0, 0),
 			size: FlxPoint.get(35, 37)
 		},
 		{
 			tag: "base-completlyPressed",
-			region: FlxPoint.get(35, 0),
+			region: FlxRect.get(35, 0),
 			size: FlxPoint.get(35, 37)
 		},
 	];
@@ -32,45 +33,45 @@ class SonicVPad extends FlxSpriteGroup
 		//left
 		{
 			tag: "leftNormal",
-			region: FlxPoint.get(70, 12),
+			region: FlxRect.get(70, 12),
 			size: FlxPoint.get(12, 5)
 		},
 		{
 			tag: "leftCheck",
-			region: FlxPoint.get(70, 0),
+			region: FlxRect.get(70, 0),
 			size: FlxPoint.get(12, 5)
 		},
 		//right
 		{
 			tag: "rightNormal",
-			region: FlxPoint.get(87, 12),
+			region: FlxRect.get(87, 12),
 			size: FlxPoint.get(12, 5)
 		},
 		{
 			tag: "rightCheck",
-			region: FlxPoint.get(87, 0),
+			region: FlxRect.get(87, 0),
 			size: FlxPoint.get(12, 5)
 		},
 		//down
 		{
 			tag: "downNormal",
-			region: FlxPoint.get(82, 12),
+			region: FlxRect.get(82, 12),
 			size: FlxPoint.get(5, 12)
 		},
 		{
 			tag: "downCheck",
-			region: FlxPoint.get(82, 0),
+			region: FlxRect.get(82, 0),
 			size: FlxPoint.get(5, 12)
 		},
 		//up
 		{
 			tag: "upNormal",
-			region: FlxPoint.get(99, 12),
+			region: FlxRect.get(99, 12),
 			size: FlxPoint.get(5, 12)
 		},
 		{
 			tag: "upCheck",
-			region: FlxPoint.get(99, 0),
+			region: FlxRect.get(99, 0),
 			size: FlxPoint.get(5, 12)
 		}
 	];
@@ -122,7 +123,8 @@ class SonicVPad extends FlxSpriteGroup
 		var button = new FlxButton(X, Y);
 		for (anim in buttons)
 		{
-			frames = FlxTileFrames.findFrame();
+			var bitmapData = new GraphicVirtualInput(0, 0);
+			button.frames = FlxTileFrames.fromGraphic(FlxGraphic.fromBitmapData(bitmapData), anim.size, anim.region);
 		}
 		button.resetSizeFromFrame();
 		button.solid = false;
@@ -137,21 +139,6 @@ class SonicVPad extends FlxSpriteGroup
 			button.onDown.callback = OnClick;
 
 		return button;
-	}
-
-	public static function getVirtualInputFrames():FlxAtlasFrames
-	{
-		#if !web
-		var bitmapData = new GraphicVirtualInput(0, 0);
-		#end
-			
-		#if !web
-		var graphic:FlxGraphic = FlxGraphic.fromBitmapData(bitmapData);
-		return FlxAtlasFrames.fromSpriteSheetPacker(graphic, Std.string(new VirtualInputData()));
-		#else
-		var graphic:FlxGraphic = FlxGraphic.fromAssetKey(Paths.image('sonicVPAD'));
-		return FlxAtlasFrames.fromSpriteSheetPacker(graphic, Std.string(new VirtualInputData()));
-		#end
 	}
 }
 
