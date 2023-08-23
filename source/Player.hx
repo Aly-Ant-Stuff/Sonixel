@@ -44,6 +44,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var frictionSpeed:Float = 0.046875;
 	public var topSpeed:Float = 6;
 	public var gravityForce:Float = 0.21875;
+	public var direction:Int = 0;
 
 	//actions
 	public var hasLookedUp:Bool = false;
