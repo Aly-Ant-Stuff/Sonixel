@@ -132,8 +132,11 @@ class SonicVPad extends FlxSpriteGroup
 		actions = new FlxSpriteGroup();
 		actions.scrollFactor.set();
 
-		dPad.add(add(buttonLeft = createButton(89, FlxG.height - 536, 67, 29, 'left')));
-		dPad.add(add(buttonRight = createButton(89, FlxG.height - 536, 67, 29, 'left')));
+		dPad.add(add(buttonLeft = createButton(89, FlxG.height - 536, 'left')));
+		dPad.add(add(buttonRight = createButton(89, FlxG.height - 536, 'right')));
+
+		dPad.scale.set(3.84, 3.84);
+		actions.scale.set(3.84, 3.84);
 	}
 
 	override public function destroy():Void
@@ -153,17 +156,19 @@ class SonicVPad extends FlxSpriteGroup
 		buttonRight = null;
 	}
 
-	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?OnClick:Void->Void):FlxButton
+	public function createButton(X:Float, Y:Float, Graphic:String, clickable:Bool = true, ?OnClick:Void->Void):FlxButton
 	{
 		var button = new FlxButton(X, Y);
 		var framesTile:FlxAtlasFrames = FlxAtlasFrames.findFrame(FlxGraphic.fromBitmapData(new GraphicVirtualInput(0, 0)));
 		framesTile = new FlxAtlasFrames(FlxGraphic.fromBitmapData(new GraphicVirtualInput(0, 0)));
-		for (index in 2...spriteSheet.length)
+		for (sprite in spriteSheet)
 		{
-			var sprite = spriteSheet[index];
 			var rect:FlxRect = FlxRect.get(sprite.x, sprite.y, sprite.w, sprite.h);
-			framesTile.addAtlasFrame(rect);
+			var sourceSize:FlxPoint = FlxPoint.get(sprite.w, sprite.h); 
+			framesTile.addAtlasFrame(rect, sourceSize, FlxPoint.get(0, 0), sprite.name);
 		}
+		button.frames = framesTile;
+		button.animation.play(Graphic + 'Normal');
 		button.resetSizeFromFrame();
 		button.antialiasing = false;
 		button.solid = false;
@@ -176,10 +181,11 @@ class SonicVPad extends FlxSpriteGroup
 
 		button.onDown.callback = OnClick;
 		if (onClick == null) {
-			onClick = function()
-			{
-				if (button.frames != null && Graphic != 'pause') button.animation.play(graphic + 'Check');
-			};
+			if (clickable)
+				onClick = function()
+				{
+					button.animation.play(graphic + 'Check');
+				};
 		}
 
 		return button;
