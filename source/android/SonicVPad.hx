@@ -75,6 +75,25 @@ class SonicVPad extends FlxSpriteGroup
 			size: FlxPoint.get(5, 12)
 		}
 	];
+
+	var actionButtons:Array<Dynamic> = [
+		//a
+		{
+			tag: "aNormal",
+			region: FlxRect.get(106, 0),
+			size: FlxPoint.get(23, 23)
+		},
+		{
+			tag: "aCheck",
+			region: FlxRect.get(106, 24),
+			size: FlxPoint.get(23, 23)
+		},
+		{
+			tag: "pauseNormal",
+			region: FlxRect.get(106, 24),
+			size: FlxPoint.get(23, 23)
+		}
+	];
 	//actions
 	public var actions:FlxSpriteGroup;
 	public var buttonJump:FlxButton;
@@ -99,6 +118,7 @@ class SonicVPad extends FlxSpriteGroup
 		actions.scrollFactor.set();
 
 		dPad.add(add(buttonLeft = createButton(89, FlxG.height - 536, 67, 29, 'left')));
+		dPad.add(add(buttonRight = createButton(89, FlxG.height - 536, 67, 29, 'left')));
 	}
 
 	override public function destroy():Void
@@ -124,9 +144,10 @@ class SonicVPad extends FlxSpriteGroup
 		for (anim in buttons)
 		{
 			var bitmapData = new GraphicVirtualInput(0, 0);
-			button.frames = FlxTileFrames.fromGraphic(FlxGraphic.fromBitmapData(bitmapData), anim.size, anim.region);
+			button.frames += FlxTileFrames.fromGraphic(FlxGraphic.fromBitmapData(bitmapData), anim.size, anim.region);
 		}
-		if (button.frames != null) button.animation.play(graphic + "Normal");
+		if (button.frames != null && Graphic != 'pause') button.animation.play(graphic + "Normal");
+		else if (Graphic == 'pause') button.animation.play("pauseNormal");
 		button.resetSizeFromFrame();
 		button.antialiasing = false;
 		button.solid = false;
@@ -137,12 +158,11 @@ class SonicVPad extends FlxSpriteGroup
 		button.ignoreDrawDebug = true;
 		#end
 
-		if (OnClick != null)
-		{
-			button.onDown.callback = OnClick;
+		button.onDown.callback = OnClick;
+		if (onClick == null) {
 			onClick = function()
 			{
-				if (button.frames != null) button.animation.play(graphic + 'Check');
+				if (button.frames != null && Graphic != null) button.animation.play(graphic + 'Check');
 			};
 		}
 
