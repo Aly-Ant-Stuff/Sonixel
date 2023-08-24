@@ -30,8 +30,6 @@ class PlayState extends FlxState
 		player.camPos = this.camPos;
 		add(player);
 
-		camGame.zoom = 3.7;
-
 		#if android
 		virtualPad = new android.SonicVPad();
 		virtualPad.alpha = 0.45;
