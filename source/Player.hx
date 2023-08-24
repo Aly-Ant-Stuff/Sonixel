@@ -82,23 +82,32 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		y += vertSPEED * FlxMath.signOf(direction);
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
-			horiSPEED = (elapsed/1.9); //pra ser mais devagar
+			spr.scale.x = -1;
+			horiSPEED += accelerationSpeed; //pra ser mais devagar
 			if (horiSPEED >= -5) horiSPEED = -5;
 			direction = -1;
+			isWalking = true;
 		}
-
-		if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
+		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
+			spr.scale.x = 1;
 			horiSPEED = (elapsed/1.9); //pra ser mais devagar
 			if (horiSPEED >= 5) horiSPEED = 5;
 			direction = 1;
 		}
+		else {
+			if (isWalking) {
+				horiSPEED -= decelerationSpeed;
+				if (horiSPEED == 0) horiSPEED = 0;
+			}
+		}
+
 
 		if (FlxG.keys.pressed.UP #if android || virtualPad.buttonUp.pressed #end)
 		{
 			spr.animation.play("lookUp");
 			new FlxTimer().start(2, function(t:FlxTimer) {
 				var targetY:Float = camPos.y - 400;
-				camPos.y -= elapsed / 3.2;
+				camPos.y -= 0.5;
 				hasLookedUp = true;
 				if (camPos.y <= targetY)
 				{
@@ -108,7 +117,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		} else {
 			if (hasLookedUp) {
 				var targetY = defaultCamPos.y;
-				camPos.y += elapsed / 3.2;
+				camPos.y += 0.5;
 				if (camPos.y >= targetY)
 				{
 					camPos.y = targetY;
