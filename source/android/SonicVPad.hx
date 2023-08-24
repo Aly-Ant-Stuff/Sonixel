@@ -27,7 +27,7 @@ class SonicVPad extends FlxSpriteGroup
 	var spriteSheet:Array<SpriteSheetStruct> = [
 		///////////////////
 		{
-			name: "base",
+			name: "baseNormal",
 			x: 0,
 			y: 0,
 			w: 35, 
