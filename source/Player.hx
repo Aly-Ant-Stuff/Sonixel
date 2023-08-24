@@ -50,6 +50,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var hasLookedUp:Bool = false;
 	public var defaultCamPos:FlxPoint = FlxPoint.get(0, 0);
 	public var isGrounded:Bool = true;
+	public var isWalking:Bool = false;
 	public var isColliding:Bool = false;
 
 	//vectorz
@@ -64,7 +65,8 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		spr.antialiasing = false;
 		add(spr);
 
-		hitbox = new FlxSprite(15, 8).makeGraphic(17, 40, FlxColor.fromRGB(255,0,255));
+		hitbox = new FlxSprite(15, 8).makeGraphic(17, 40, FlxColor.fromRGB(255, 0, 255));
+		hitbox.alpha = 0.4;
 		add(hitbox);
 
 		if (pCam != null && camPos != null)
@@ -78,29 +80,38 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		//player general part
 		defaultCamPos.set(spr.x + (spr.width / 2), spr.y + (spr.height / 2));
 		camPos.setPosition(defaultCamPos.x, defaultCamPos.y);
-		x += horiSPEED * FlxMath.signOf(direction);
-		y += vertSPEED * FlxMath.signOf(direction);
+		x += horiSPEED;
+		y += vertSPEED;
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			spr.scale.x = -1;
-			horiSPEED += accelerationSpeed; //pra ser mais devagar
-			if (horiSPEED >= -5) horiSPEED = -5;
-			direction = -1;
+			if (horiSPEED > 0) {
+				horiSPEED -= decelerationSpeed; //pra ser mais devagar
+				if (horiSPEED <= 0)
+					horiSPEED = -0.5;
+				direction = 1;
+			} else if (horiSPEED < -topSpeed) {
+				horiSPEED -= accelerationSpeed;
+				if (horiSPEED <= -topSpeed)
+					horiSPEED = -topSpeed;
+			}
 			isWalking = true;
 		}
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
 			spr.scale.x = 1;
-			horiSPEED = (elapsed/1.9); //pra ser mais devagar
-			if (horiSPEED >= 5) horiSPEED = 5;
-			direction = 1;
-		}
-		else {
-			if (isWalking) {
-				horiSPEED -= decelerationSpeed;
-				if (horiSPEED == 0) horiSPEED = 0;
+			if (horiSPEED < 0) {
+				horiSPEED += decelerationSpeed; //pra ser mais devagar
+				if (horiSPEED >= 0)
+					horiSPEED = 0.5;
+				direction = 1;
+			} else if (horiSPEED < topSpeed) {
+				horiSPEED += accelerationSpeed;
+				if (horiSPEED >= topSpeed)
+					horiSPEED = topSpeed;
 			}
+		} else {
+			horiSPEED -= Math.min(Math.abs(horiSPEED), frictionSpeed) * FlxMath.signOf(direction);
 		}
-
 
 		if (FlxG.keys.pressed.UP #if android || virtualPad.buttonUp.pressed #end)
 		{
