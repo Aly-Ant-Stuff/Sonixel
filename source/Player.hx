@@ -110,7 +110,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 					horiSPEED = topSpeed;
 			}
 		} else {
-			horiSPEED -= Math.min(Math.abs(horiSPEED), frictionSpeed) * FlxMath.signOf(direction);
+			horiSPEED -= Math.min(Math.abs(horiSPEED), frictionSpeed) * FlxMath.signOf(horiSPEED);
 		}
 
 		if (FlxG.keys.pressed.UP #if android || virtualPad.buttonUp.pressed #end)
