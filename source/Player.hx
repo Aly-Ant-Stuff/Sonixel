@@ -14,6 +14,9 @@ import lime.math.Vector2;
 import android.SonicVPad;
 #end
 
+//i get the physical stuff for the movement of sonic from Sonic Physics Guide from Sonic Retro and i recreated it in haxeflixel
+//yeah im really dumb in math but i love math...
+
 class Player extends FlxTypedSpriteGroup<FlxSprite>
 {
 	public var spr:FlxSprite;
