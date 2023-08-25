@@ -32,7 +32,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	#end
 	public var animationStuff:Array<Dynamic> = [
 		["idle", [0], 12],
-		["loopUp", [1,2], 12],
+		["lookUp", [1,2], 12],
 		["goDown", [3, 4], 12]
 	];
 
@@ -65,10 +65,13 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		spr = new FlxSprite().loadGraphic("assets/images/Sonic.png", true, 46, 52);
 		for (i in 0...animationStuff.length)
 			spr.animation.add(animationStuff[i][0], animationStuff[i][1], animationStuff[i][2]);
+		spr.animation.play("idle");
 		spr.antialiasing = false;
+		spr.scale.set(3.5, 3.5);
+		spr.updateHitbox();
 		add(spr);
 
-		hitbox = new FlxSprite(15, 8).makeGraphic(17, 40, FlxColor.fromRGB(255, 0, 255));
+		hitbox = new FlxSprite(15, 8).makeGraphic(17 * 3.5, 40 * 3.5, FlxColor.fromRGB(255, 0, 255));
 		hitbox.alpha = 0.4;
 		add(hitbox);
 
@@ -89,7 +92,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			spr.scale.x = -1;
 			if (horiSPEED > 0) {
-				horiSPEED -= decelerationSpeed; //pra ser mais devagar
+				horiSPEED -= decelerationSpeed;
 				if (horiSPEED <= 0)
 					horiSPEED = -0.5;
 				direction = 1;
@@ -103,7 +106,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
 			spr.scale.x = 1;
 			if (horiSPEED < 0) {
-				horiSPEED += decelerationSpeed; //pra ser mais devagar
+				horiSPEED += decelerationSpeed;
 				if (horiSPEED >= 0)
 					horiSPEED = 0.5;
 				direction = 1;
