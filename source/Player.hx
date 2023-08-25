@@ -67,11 +67,11 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			spr.animation.add(animationStuff[i][0], animationStuff[i][1], animationStuff[i][2]);
 		spr.animation.play("idle");
 		spr.antialiasing = false;
-		spr.scale.set(3.5, 3.5);
+		spr.scale.set(4, 4);
 		spr.updateHitbox();
 		add(spr);
 
-		hitbox = new FlxSprite(15, 8).makeGraphic(17 * 3.5, 40 * 3.5, FlxColor.fromRGB(255, 0, 255));
+		hitbox = new FlxSprite(15, 8).makeGraphic(17 * 4, 40 * 4, FlxColor.fromRGB(255, 0, 255));
 		hitbox.alpha = 0.4;
 		add(hitbox);
 
