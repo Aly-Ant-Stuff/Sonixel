@@ -14,8 +14,10 @@ import lime.math.Vector2;
 import android.SonicVPad;
 #end
 
-//i get the physical stuff for the movement of sonic from Sonic Physics Guide from Sonic Retro and i recreated it in haxeflixel
-//yeah im really dumb in math but i love math...
+/**
+  * i get the physical stuff for the movement of sonic from Sonic Physics Guide from Sonic Retro and i recreated it in haxeflixel
+  * yeah im really dumb in math but i love math...
+*/
 
 class Player extends FlxTypedSpriteGroup<FlxSprite>
 {
@@ -84,13 +86,16 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public function playerUpdate(elapsed:Float)
 	{
 		//player general part
+		for (s in [spr, hitbox])
+			s.updateHitbox();
+
 		defaultCamPos.set(spr.x + (spr.width / 2), spr.y + (spr.height / 2));
 		camPos.setPosition(defaultCamPos.x, defaultCamPos.y);
 		x += horiSPEED;
 		y += vertSPEED;
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
-			spr.scale.x = -1;
+			spr.scale.x = -4;
 			if (horiSPEED > 0) {
 				horiSPEED -= decelerationSpeed;
 				if (horiSPEED <= 0)
@@ -104,12 +109,11 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			isWalking = true;
 		}
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
-			spr.scale.x = 1;
+			spr.scale.x = 4;
 			if (horiSPEED < 0) {
 				horiSPEED += decelerationSpeed;
 				if (horiSPEED >= 0)
 					horiSPEED = 0.5;
-				direction = 1;
 			} else if (horiSPEED < topSpeed) {
 				horiSPEED += accelerationSpeed;
 				if (horiSPEED >= topSpeed)
@@ -123,7 +127,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		{
 			spr.animation.play("lookUp");
 			new FlxTimer().start(2, function(t:FlxTimer) {
-				var targetY:Float = camPos.y - 400;
+				var targetY:Float = camPos.y - 100;
 				camPos.y -= 0.5;
 				hasLookedUp = true;
 				if (camPos.y <= targetY)
