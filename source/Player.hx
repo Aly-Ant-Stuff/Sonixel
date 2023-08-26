@@ -83,7 +83,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		y += ySpeed;
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
-			spr.scale.x = -4;
+			spr.scale.x = -1;
 			if (xSpeed > 0) {
 				xSpeed -= decelerationSpeed;
 				if (xSpeed <= 0)
@@ -99,7 +99,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			}
 		}
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
-			spr.scale.x = 4;
+			spr.scale.x = 1;
 			if (xSpeed < 0) {
 				xSpeed += decelerationSpeed;
 				if (xSpeed >= 0)
@@ -121,15 +121,13 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			if (ySpeed >= 16) ySpeed = 16;
 		}
 
-		if (ySpeed < 0 && ySpeed > -4){
-			xSpeed -= ((xSpeed / 0.125) / 256);
-		}
-
 		if (FlxG.keys.pressed.SPACE #if android || virtualPad.buttonJump.pressed #end){
 			ySpeed -= jumpForce * Math.sin(currentGRDAngle);
 			xSpeed -= jumpForce * Math.cos(currentGRDAngle);
 		}
 
+		FlxG.watch.addQuick("x do sonic", xSpeed);
+		FlxG.watch.addQuick("y do sonic", ySpeed);
 		FlxG.watch.addQuick("velocidade do sonic em x", xSpeed);
 		FlxG.watch.addQuick("velocidade do sonic em y", ySpeed);
 	}
