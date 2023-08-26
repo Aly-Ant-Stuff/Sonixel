@@ -9,7 +9,7 @@ class Main extends Sprite
 {
 	public static var game:Array<Dynamic> = [
 		1280, 720, //resolution
-		PlayState, //state
+		sonixel.game.states.PlayState, //state
 		90, //framerate
 		true, //skip splash
 		#if mobile true #else false #end //fullscreen
@@ -19,7 +19,7 @@ class Main extends Sprite
 	{
 		super();
 
-		addChild(new FlxGame(game[0], game[1], Init, game[3], game[3], game[4], game[5]));
+		addChild(new FlxGame(game[0], game[1], sonixel.Init, game[3], game[3], game[4], game[5]));
 		//exactly 5 indexes lma
 	}
 

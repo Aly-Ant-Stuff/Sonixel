@@ -7,13 +7,18 @@ import flixel.FlxCamera;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
+#if android
+import sonixel.plataforms.android.SonicVPad;
+#end
+import sonixel.game.objects.common.Player;
+
 class PlayState extends FlxState
 {
 	public var player:Player;
 	public var camGame:FlxCamera;
 	public var camPos:FlxObject;
 	#if android
-	public var virtualPad:android.SonicVPad;
+	public var virtualPad:SonicVPad;
 	#end
 	public var focusInPlayerX:Bool = true;
 	public var focusInPlayerY:Bool = true;
@@ -35,7 +40,7 @@ class PlayState extends FlxState
 		add(player);
 
 		#if android
-		virtualPad = new android.SonicVPad();
+		virtualPad = new SonicVPad();
 		virtualPad.alpha = 0.45;
 		add(virtualPad);
 		player.virtualPad = this.virtualPad;
@@ -74,6 +79,7 @@ class PlayState extends FlxState
 				}
 			});
 		}else{
+			player.spr.animation.play("idle");
 			player.isLookingUp = false;
 			if (player.hasLookedUp){
 				focusInPlayerX = true;

@@ -4,7 +4,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="SonicPhysics" file="SonicPhysics" package="com.alyant.sonicflixel" packageName="com.alyant.sonicflixel" main="Main" version="1.0" company="HaxeFlixel" />
+	<app title="Sonixel" file="Sonixel" package="com.alyant.sonixel" packageName="com.alyant.sonixel" main="Main" version="1.0" company="AlyAnt" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
