@@ -101,7 +101,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 				if (horiSPEED <= 0)
 					horiSPEED = -0.5;
 				direction = 1;
-			} else if (horiSPEED < -topSpeed) {
+			} else if (horiSPEED > -topSpeed) {
 				horiSPEED -= accelerationSpeed;
 				if (horiSPEED <= -topSpeed)
 					horiSPEED = -topSpeed;
