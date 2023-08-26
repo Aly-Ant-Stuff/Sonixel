@@ -52,11 +52,11 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 
 	//actions
 	public var hasLookedUp:Bool = false;
-	public var defaultCamPos:FlxPoint = FlxPoint.get(0, 0);
 	public var isGrounded:Bool = false;
 	public var isLookingUp:Bool = false;
 	public var isWalking:Bool = false;
 	public var isColliding:Bool = false;
+	public var debugMode:Bool = false;
 
 	//vectorz
 
