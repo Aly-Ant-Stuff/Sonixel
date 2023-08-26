@@ -14,6 +14,8 @@ class PlayState extends FlxState
 	#if android
 	public var virtualPad:android.SonicVPad;
 	#end
+	public var focusInPlayerX:Bool = true;
+	public var focusInPlayerY:Bool = true;
 
 	override public function create()
 	{
@@ -22,11 +24,13 @@ class PlayState extends FlxState
 		FlxCamera.defaultCameras = [camGame];
 		camGame.follow(camPos, LOCKON, 1);
 		camGame.bgColor = FlxColor.GRAY;
+		camGame.zoom = 4;
 
 		camPos = new FlxObject(0, 0, 1, 1);
 		add(camPos);
 
-		player = new Player(FlxG.width / 2, FlxG.height / 2);
+		player = new Player();
+		player.screenCenter(XY); //placeholder
 		add(player);
 
 		#if android
@@ -48,7 +52,40 @@ class PlayState extends FlxState
 	{
 		player.playerUpdate(elapsed);
 
-		camPos.x = player.x + (player.width / 2);
+		if(focusInPlayerX){
+			camPos.x = player.x + (player.width / 2);
+		}
+		if(focusInPlayerY){
+			camPos.y = player.y + (player.height / 2);
+		}
+		if (FlxG.keys.pressed.UP #if android || virtualPad.buttonUp.pressed #end && player.isGrounded){
+			focusInPlayerY = false;
+			focusInPlayerX = false;
+
+			player.spr.animation.play("lookUp");
+			player.isLookingUp = true;
+			new FlxTimer().start(2, function(t:FlxTimer){
+				var targetY:Float = camPos.y - 100;
+				camPos.y -= 0.5;
+				player.hasLookedUp = true;
+				if (camPos.y <= targetY){
+					camPos.y = targetY;
+				}
+			});
+		}else{
+			player.isLookingUp = false;
+			if (player.hasLookedUp){
+				focusInPlayerX = true;
+				var targetY = player.y + (player.height / 2);
+				camPos.y += 0.5;
+				if (camPos.y >= targetY)
+				{
+					camPos.y = targetY;
+					focusInPlayerY = true;
+					player.hasLookedUp = false;
+				}
+			}
+		}
 
 		super.update(elapsed);
 	}
