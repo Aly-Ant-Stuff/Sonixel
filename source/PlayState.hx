@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.FlxObject;
 import flixel.FlxCamera;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 class PlayState extends FlxState
 {
