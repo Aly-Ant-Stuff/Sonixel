@@ -126,8 +126,8 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			xSpeed -= jumpForce * Math.cos(currentGRDAngle);
 		}
 
-		FlxG.watch.addQuick("x do sonic", xSpeed);
-		FlxG.watch.addQuick("y do sonic", ySpeed);
+		FlxG.watch.addQuick("x do sonic", x);
+		FlxG.watch.addQuick("y do sonic", y);
 		FlxG.watch.addQuick("velocidade do sonic em x", xSpeed);
 		FlxG.watch.addQuick("velocidade do sonic em y", ySpeed);
 	}
