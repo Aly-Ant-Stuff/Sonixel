@@ -53,7 +53,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	//actions
 	public var hasLookedUp:Bool = false;
 	public var defaultCamPos:FlxPoint = FlxPoint.get(0, 0);
-	public var isGrounded:Bool = true;
+	public var isGrounded:Bool = false;
 	public var isLookingUp:Bool = false;
 	public var isWalking:Bool = false;
 	public var isColliding:Bool = false;
@@ -114,28 +114,6 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			}
 		} else {
 			xSpeed -= Math.min(Math.abs(xSpeed), frictionSpeed) * FlxMath.signOf(xSpeed);
-		}
-
-		if (FlxG.keys.pressed.UP #if android || virtualPad.buttonUp.pressed #end && isGrounded)
-		{
-			spr.animation.play("lookUp");
-			new FlxTimer().start(2, function(t:FlxTimer){
-				var targetY:Float = camPos.y - 100;
-				camPos.y -= 0.5;
-				hasLookedUp = true;
-				if (camPos.y <= targetY){
-					camPos.y = targetY;
-				}
-			});
-		}else{
-			if (hasLookedUp){
-				var targetY = defaultCamPos.y;
-				camPos.y += 0.5;
-				if (camPos.y >= targetY)
-				{
-					camPos.y = targetY;
-				}
-			}
 		}
 
 //  ----- gravity ----- //
