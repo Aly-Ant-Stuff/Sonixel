@@ -23,12 +23,12 @@ class PlayState extends FlxState
 		camGame = new FlxCamera();
 		FlxG.cameras.reset(camGame);
 		FlxCamera.defaultCameras = [camGame];
-		camGame.follow(camPos, LOCKON, 1);
 		camGame.bgColor = FlxColor.GRAY;
 		camGame.zoom = 4;
 
 		camPos = new FlxObject(0, 0, 1, 1);
 		add(camPos);
+		FlxG.camera.follow(camPos, LOCKON, 1);
 
 		player = new Player();
 		player.screenCenter(XY); //placeholder
