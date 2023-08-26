@@ -1,4 +1,4 @@
-package android;
+package sonixel.plataforms.android;
 
 import flixel.FlxG;
 import flixel.graphics.frames.FlxTileFrames;

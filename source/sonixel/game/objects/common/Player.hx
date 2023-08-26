@@ -1,18 +1,21 @@
-package;
+package sonixel.game.objects.common;
 
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
-import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
-import lime.math.Vector2;
+
 #if android
-import android.SonicVPad;
+import sonixel.plataforms.android.SonicVPad;
 #end
+
+import sonixel.backend.Paths;
+import sonixel.game.objects.misc.Hitbox;
 
 /**
   * i get the physical stuff for the movement of sonic from Sonic Physics Guide from Sonic Retro and i recreated it in haxeflixel
@@ -22,9 +25,7 @@ import android.SonicVPad;
 class Player extends FlxTypedSpriteGroup<FlxSprite>
 {
 	public var spr:FlxSprite;
-	public var hitbox:FlxSprite;
-
-	public var spinDashT:FlxSprite;
+	public var hitbox:Hitbox;
 
 	public var curGround:FlxSprite;
 	#if android
@@ -64,15 +65,14 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	{
 		super(x, y);
 
-		spr = new FlxSprite().loadGraphic("assets/images/Sonic.png", true, 46, 52);
+		spr = new FlxSprite().loadGraphic(Paths.image('Sonic'), true, 46, 52);
 		for (i in 0...animationStuff.length)
 			spr.animation.add(animationStuff[i][0], animationStuff[i][1], animationStuff[i][2]);
 		spr.animation.play("idle");
 		spr.antialiasing = false;
 		add(spr);
 
-		hitbox = new FlxSprite(15, 8).makeGraphic(17, 40, FlxColor.fromRGB(255, 0, 255));
-		hitbox.alpha = 0.4;
+		hitbox = new Hitbox(15, 8, 17, 40, PLAYER);
 		add(hitbox);
 	}
 

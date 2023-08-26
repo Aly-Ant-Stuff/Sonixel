@@ -1,4 +1,4 @@
-package;
+package sonixel.game.states;
 
 import flixel.FlxG;
 import flixel.FlxState;

@@ -1,4 +1,4 @@
-package;
+package sonixel;
 
 import flixel.FlxG;
 import flixel.FlxState;

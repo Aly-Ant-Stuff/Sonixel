@@ -1,0 +1,1 @@
+add miscellaneous things to some classes of flixel

@@ -1,4 +1,4 @@
-package;
+package sonixel.backend;
 
 /*
 	stealing code from forever enginr
