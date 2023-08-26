@@ -24,7 +24,7 @@ class Hitbox extends FlxSprite
 		switch (type){
 			case ATTACKABLE | HURT | HURT_AND_ATTACKABLE:
 				color = FlxColor.RED;
-			case REBOUND;
+			case REBOUND:
 				color = FlxColor.BLUE;
 			case VIEW_AREA:
 				color = FlxColor.YELLOW;
