@@ -60,7 +60,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 
 	//vectorz
 
-	public function new(x:Float, y:Float, ?char:String)
+	public function new(x:Float = 0, y:Float = 0, ?char:String)
 	{
 		super(x, y);
 
@@ -88,7 +88,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 				xSpeed -= decelerationSpeed;
 				if (xSpeed <= 0)
 					xSpeed = -0.5;
-				direction = 1;
+
 			} else if (xSpeed > -topSpeed) {
 				xSpeed -= accelerationSpeed;
 				if (xSpeed <= -topSpeed)
@@ -97,7 +97,6 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 					FlxG.log.add('sonic atinguiu a velocide maxima sem nada olha que fo');
 				}
 			}
-			isWalking = true;
 		}
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
 			spr.scale.x = 4;
