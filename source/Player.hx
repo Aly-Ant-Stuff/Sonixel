@@ -73,7 +73,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		spr.updateHitbox();
 		add(spr);
 
-		hitbox = new FlxSprite(15, 8).makeGraphic(17 * 4, 40 * 4, FlxColor.fromRGB(255, 0, 255));
+		hitbox = new FlxSprite(15 * 2, 8 * 2).makeGraphic(17 * 4, 40 * 4, FlxColor.fromRGB(255, 0, 255));
 		hitbox.alpha = 0.4;
 		add(hitbox);
 
