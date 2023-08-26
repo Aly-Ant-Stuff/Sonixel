@@ -20,14 +20,13 @@ class PlayState extends FlxState
 		camGame = new FlxCamera();
 		FlxG.cameras.reset(camGame);
 		FlxCamera.defaultCameras = [camGame];
+		camGame.follow(camPos, LOCKON, 1);
 		camGame.bgColor = FlxColor.GRAY;
 
 		camPos = new FlxObject(0, 0, 1, 1);
 		add(camPos);
 
-		player = new Player(500, 500);
-		player.pCam = this.camGame;
-		player.camPos = this.camPos;
+		player = new Player(FlxG.width / 2, FlxG.height / 2);
 		add(player);
 
 		#if android
@@ -48,6 +47,8 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		player.playerUpdate(elapsed);
+
+		camPos.x = player.x + (player.width / 2);
 
 		super.update(elapsed);
 	}
