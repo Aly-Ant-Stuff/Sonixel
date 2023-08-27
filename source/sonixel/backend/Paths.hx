@@ -15,7 +15,7 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.Assets;
 
-
+using StringTools;
 
 class Paths
 {
