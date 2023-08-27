@@ -65,7 +65,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	{
 		super(x, y);
 
-		spr = new FlxSprite().loadGraphic(Paths.image('Sonic'), true, 46, 52);
+		spr = new FlxSprite().loadGraphic(Paths.image('Sonic'), true, 48, 48);
 		for (i in 0...animationStuff.length)
 			spr.animation.add(animationStuff[i][0], animationStuff[i][1], animationStuff[i][2]);
 		spr.animation.play("idle");
