@@ -28,7 +28,7 @@ class Hitbox extends FlxSprite
 				color = FlxColor.BLUE;
 			case VIEW_AREA:
 				color = FlxColor.YELLOW;
-			case PLAYER:
+			case PLAYER || TERRAIN:
 				color = FlxColor.GREEN;
 		}
 		alpha = 0.4;
