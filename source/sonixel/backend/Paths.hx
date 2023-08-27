@@ -15,6 +15,8 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.Assets;
 
+
+
 class Paths
 {
 	// Here we set up the paths class. This will be used to
@@ -227,7 +229,7 @@ class Paths
 	{
 		var returnPath:String = 'assets/$file';
 		if (!Assets.exists(returnPath))
-			returnPath = CoolUtil.swapSpaceDash(returnPath);
+			returnPath = swapSpaceDash(returnPath);
 		return returnPath;
 	}
 
@@ -278,14 +280,14 @@ class Paths
 
 	inline static public function voices(song:String):Any
 	{
-		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Voices';
+		var songKey:String = '${swapSpaceDash(song.toLowerCase())}/Voices';
 		var voices = returnSound('songs', songKey);
 		return voices;
 	}
 
 	inline static public function inst(song:String):Any
 	{
-		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Inst';
+		var songKey:String = '${swapSpaceDash(song.toLowerCase())}/Inst';
 		var inst = returnSound('songs', songKey);
 		return inst;
 	}
