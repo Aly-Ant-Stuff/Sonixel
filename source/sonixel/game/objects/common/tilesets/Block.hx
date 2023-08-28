@@ -16,7 +16,7 @@ class Block extends FlxSpriteGroup {
 		["bloco", [1], 1]
 	];
 
-	public function new(x:Float, y:Float, width = 24, height = 24, spr:String){
+	public function new(x:Float, y:Float, width = 24, height = 24, ?spr:String){
 		super(x,y);
 
 		tileSpr = new FlxSprite().loadGraphic(Paths.image('tilesets/tileset-test'), 24, 24);
