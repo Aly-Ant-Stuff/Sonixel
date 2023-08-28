@@ -27,7 +27,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var spr:FlxSprite;
 	public var hitbox:Hitbox;
 
-	public var curGround:FlxSprite;
+	public var curGround:FlxSprite = null;
 	#if android
 	public var virtualPad:SonicVPad;
 	#end
