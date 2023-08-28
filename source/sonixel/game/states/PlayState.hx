@@ -6,17 +6,20 @@ import flixel.FlxObject;
 import flixel.FlxCamera;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.util.FlxCollision;
 
 #if android
 import sonixel.plataforms.android.SonicVPad;
 #end
 import sonixel.game.objects.common.Player;
+import sonixel.util.CoolestUtils;
 
 class PlayState extends FlxState
 {
 	public var player:Player;
 	public var camGame:FlxCamera;
 	public var camPos:FlxObject;
+	public var map = null;
 	#if android
 	public var virtualPad:SonicVPad;
 	#end
@@ -34,6 +37,9 @@ class PlayState extends FlxState
 		camPos = new FlxObject(0, 0, 1, 1);
 		add(camPos);
 		FlxG.camera.follow(camPos, LOCKON, 1);
+
+		map = FlxCollision.createCameraWallBlock(camGame, true, 3);
+		add(map);
 
 		player = new Player();
 		player.screenCenter(XY); //placeholder
@@ -92,6 +98,11 @@ class PlayState extends FlxState
 					player.hasLookedUp = false;
 				}
 			}
+		}
+
+		for (block in map.members){
+			player.isGrounded = CoolestUtils.collisionHitboxCheck(player.hitbox, block.topArea);
+			player.curGround = block;
 		}
 
 		super.update(elapsed);
