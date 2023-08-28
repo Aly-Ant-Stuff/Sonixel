@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 
+import sonixel.backend.Paths;
 import sonixel.game.objects.misc.Hitbox;
 
 class Block extends FlxSpriteGroup {
