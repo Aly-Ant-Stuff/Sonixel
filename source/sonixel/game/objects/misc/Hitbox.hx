@@ -17,6 +17,8 @@ enum HitboxType
 
 class Hitbox extends FlxSprite
 {
+	public var isColliding:Bool;
+
 	public function new (x:Float, y:Float, width:Int, height:Int, type:HitboxType){
 		super(x, y);
 		makeGraphic(width, height, FlxColor.WHITE); //white to be colorable
