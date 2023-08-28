@@ -101,7 +101,7 @@ class PlayState extends FlxState
 		}
 
 		for (block in map.members){
-			player.isGrounded = CoolestUtils.collisionHitboxCheck(player.hitbox, block.topArea);
+			player.isGrounded = CoolestUtils.collisionCheck(player.hitbox, block.topArea);
 			player.curGround = block;
 		}
 
