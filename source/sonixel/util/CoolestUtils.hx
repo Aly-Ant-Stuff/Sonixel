@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 import sonixel.game.objects.misc.Hitbox;
 
 class CoolestUtils {
-	public static function collisionCheck(hitbox1:FlxSprite, hitbox2:FlxSprite, onCollision:Void->Void):Bool{
+	public static function collisionCheck(hitbox1:FlxSprite, hitbox2:FlxSprite, ?onCollision:Void->Void):Bool{
 		var isColliding:Bool = false;
 		var lastColor = hitbox1.color;
 		FlxG.collide(hitbox1, hitbox2, function(){
