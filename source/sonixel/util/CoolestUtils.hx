@@ -2,6 +2,7 @@ package sonixel.util;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.util.FlxColor;
 import sonixel.game.objects.misc.Hitbox;
 
 class CoolestUtils {
