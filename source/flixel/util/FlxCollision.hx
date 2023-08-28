@@ -13,7 +13,7 @@ import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.tile.FlxTileblock;
 
-import sonixel.objects.common.tilesets.Block;
+import sonixel.game.objects.common.tilesets.Block;
 
 /**
  * FlxCollision
