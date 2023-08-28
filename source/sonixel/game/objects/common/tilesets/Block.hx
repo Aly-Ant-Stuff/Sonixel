@@ -27,10 +27,10 @@ class Block extends FlxSpriteGroup {
 		tileSpr.updateHitbox();
 		add(tileSpr);
 
-		topArea = new Hitbox(tileSpr.x, tileSpr.y + tileSpr.height / 2, hitbox.width, hitbox.height / 2);
+		topArea = new Hitbox(tileSpr.x, tileSpr.y + tileSpr.height / 2, tileSpr.width, tileSpr.height / 2);
 		add(topArea);
 
-		botArea = new Hitbox(tileSpr.x, tileSpr.y + (tileSpr.height - (tileSpr.height/2)), hitbox.width, hitbox.height/ 2);
+		botArea = new Hitbox(tileSpr.x, tileSpr.y + (tileSpr.height - (tileSpr.height/2)), tileSpr.width, tileSpr.height/ 2);
 		add(botArea);
 	}
 }
