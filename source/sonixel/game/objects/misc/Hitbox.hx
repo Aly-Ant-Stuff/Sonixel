@@ -17,6 +17,7 @@ enum HitboxType
 
 class Hitbox extends FlxSprite
 {
+	public var type:HitboxType;
 	public var isColliding:Bool;
 
 	public function new (x:Float, y:Float, width:Int, height:Int, type:HitboxType){
@@ -33,6 +34,7 @@ class Hitbox extends FlxSprite
 			case PLAYER | TERRAIN:
 				color = FlxColor.GREEN;
 		}
+		type = this.type;
 		alpha = 0.4;
 	}
 }
