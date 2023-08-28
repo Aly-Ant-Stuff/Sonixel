@@ -28,7 +28,7 @@ class Hitbox extends FlxSprite
 	];
 	public var type:HitboxType;
 	public var isColliding:Bool;
-	public var originalColor:FlxColor;
+	public var originalColor:FlxColor; //in sonixel.utils.CoolestUtils you will understand
 
 	public function new (x:Float, y:Float, width:Int, height:Int, type:HitboxType){
 		super(x, y);
