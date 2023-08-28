@@ -1,4 +1,4 @@
-package sonixel.objects.common.tilesets;
+package sonixel.game.objects.common.tilesets;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
