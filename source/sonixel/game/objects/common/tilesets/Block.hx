@@ -19,7 +19,7 @@ class Block extends FlxSpriteGroup {
 	public function new(x:Float, y:Float, width = 24, height = 24, spr:String){
 		super(x,y);
 
-		tileSpr = new FlxSprite().loadGraphic(Paths.image('tilesets'), 24, 24);
+		tileSpr = new FlxSprite().loadGraphic(Paths.image('tilesets/tileset-test'), 24, 24);
 		for (anim in tiles)
 			animation.add(anim[0], anim[1], anim[2]);
 		animation.play('bloco');
