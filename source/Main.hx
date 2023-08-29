@@ -5,6 +5,11 @@ import flixel.FlxState;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 
+typedef ZoneStruct ={
+	var name:String;
+	var acts:Array<Int>; //set do 3 automally
+}
+
 class Main extends Sprite
 {
 	public static var game:Array<Dynamic> = [
@@ -14,6 +19,8 @@ class Main extends Sprite
 		true, //skip splash
 		#if mobile true #else false #end //fullscreen
 	];
+	
+	
 
 	public function new()
 	{
