@@ -1,3 +1,5 @@
+//                                SCRAPPED                                         //
+
 package flixel.util;
 
 import flash.display.BitmapData;
