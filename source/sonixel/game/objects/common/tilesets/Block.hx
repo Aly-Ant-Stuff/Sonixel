@@ -12,6 +12,9 @@ class Block extends FlxSpriteGroup {
 	public var topArea:Hitbox;
 	public var botArea:Hitbox;
 
+	public var groundSpeed:Float = 0.258450;
+	public var reachedAngle:Float = 0.0;
+
 	private var tiles:Array<Dynamic> = [ //same thing with the player class
 		["rampa", [0], 1],
 		["bloco", [1], 1]
