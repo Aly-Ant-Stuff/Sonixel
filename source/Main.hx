@@ -31,7 +31,7 @@ class Main extends Sprite
 	}
 
 	public static function switchState(nextState:FlxState) {
-		//TODO: the transition
+		//O QUE FAZER: a transiçao
 		FlxG.switchState(nextState);
 	}
 }
