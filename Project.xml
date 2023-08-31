@@ -44,7 +44,8 @@
 	<!--In case you want to use nape with flixel-->
 	<!--<haxelib name="nape-haxe4" />-->
 
-	<!-- ______________________________ Haxedefines _____________________________ -->
+	<!-- ______________________________ Defines _____________________________ -->
+	<define name="SONIXEL_DEBUGGING" />
 
 	<!--Enable the Flixel core recording system-->
 	<!--<haxedef name="FLX_RECORD" />-->
