@@ -43,7 +43,6 @@ class PlayState extends FlxState
 		add(map);
 
 		player = new Player();
-		player.screenCenter(XY); //placeholder
 		FlxG.log.add('initial player x pos: ' +player.x);
 		FlxG.log.add('initial player y pos: ' +player.y);
 		add(player);
@@ -106,14 +105,12 @@ class PlayState extends FlxState
 		}
 
 		for (block in map.terrains.members){
-			player.isGrounded = CoolestUtils.collisionCheck(player.hitbox, block.topArea);
-			if (player)
-			player.curGround = block;
+			if (player.curGround == block);
+				player.isGrounded = CoolestUtils.collisionCheck(player.hitbox, block.topArea);
 		}
 
-		//in x
 		if (map!=null){
-
+			//in x
 			if(camPos.x<=map.x)
 				camPos.x=map.x;
 			else if(camPos.x>=map.x+map.width)
