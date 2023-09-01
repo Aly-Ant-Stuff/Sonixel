@@ -19,13 +19,12 @@ class Main extends Sprite
 		true, //skip splash
 		#if mobile true #else false #end //fullscreen
 	];
-	
-	
+
+	public static var sonixelDebugging:Bool = #if SONIXEL_DEBUGGING true #else false #end;
 
 	public function new()
 	{
 		super();
-
 		addChild(new FlxGame(game[0], game[1], sonixel.Init, game[3], game[3], game[4], game[5]));
 		//exactly 5 indexes lma
 	}
