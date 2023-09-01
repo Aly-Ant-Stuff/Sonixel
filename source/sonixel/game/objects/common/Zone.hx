@@ -79,6 +79,9 @@ class Zone extends FlxTypedSpriteGroup<FlxBasic>
 		if(player!=null){
 			player.x = playerInitialPosition.x;
 			player.y = playerInitialPosition.y;
+			if (file==null){
+				player.screenCenter(XY);
+			}
 		}
 
 		if (file != null)
