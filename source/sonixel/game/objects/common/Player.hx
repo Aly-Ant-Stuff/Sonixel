@@ -27,7 +27,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var spr:FlxSprite;
 	public var hitbox:Hitbox;
 
-	public var curGround:FlxSprite = null;
+	public var curGround:tilesets.Block = null;
 	#if android
 	public var virtualPad:SonicVPad;
 	#end
@@ -81,6 +81,8 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		//player general part
 		x += xSpeed;
 		y += ySpeed;
+		if(curGround.groundSpeed > 0)
+			xSpeed += curGround.groundSpeed;
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			spr.scale.x = -1;
