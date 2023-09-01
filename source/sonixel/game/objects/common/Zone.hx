@@ -63,7 +63,7 @@ class Zone extends FlxTypedSpriteGroup<FlxBasic>
 		background = new FlxTypedSpriteGroup<FlxBasic>();
 		add(background);
 
-		terrains = new FlxTypedSpriteGroup<FlxBasic>();
+		terrains = new FlxTypedSpriteGroup<Block>();
 		add(terrains);
 
 		foreground = new FlxTypedSpriteGroup<FlxBasic>();
