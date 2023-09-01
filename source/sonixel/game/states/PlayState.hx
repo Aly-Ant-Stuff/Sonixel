@@ -19,7 +19,7 @@ class PlayState extends FlxState
 	public var player:Player;
 	public var camGame:FlxCamera;
 	public var camPos:FlxObject;
-	public var map = null;
+	public var map:Zone = null;
 	#if android
 	public var virtualPad:SonicVPad;
 	#end
@@ -38,12 +38,17 @@ class PlayState extends FlxState
 		add(camPos);
 		FlxG.camera.follow(camPos, LOCKON, 1);
 
-		map = FlxCollision.createCameraWallBlock(camGame, true, 3);
+		map = new Zone();
+		map.generateZone(null, player, null);
 		add(map);
 
 		player = new Player();
 		player.screenCenter(XY); //placeholder
+		FlxG.log.add('initial player x pos: ' +player.x);
+		FlxG.log.add('initial player y pos: ' +player.y);
 		add(player);
+
+		add(map.foreground);
 
 		#if android
 		virtualPad = new SonicVPad();
@@ -100,9 +105,24 @@ class PlayState extends FlxState
 			}
 		}
 
-		for (block in map.members){
+		for (block in map.terrains.members){
 			player.isGrounded = CoolestUtils.collisionCheck(player.hitbox, block.topArea);
+			if (player)
 			player.curGround = block;
+		}
+
+		//in x
+		if (map!=null){
+
+			if(camPos.x<=map.x)
+				camPos.x=map.x;
+			else if(camPos.x>=map.x+map.width)
+				camPos.x=map.x+map.width;
+			//in y
+			if(camPos.x<=map.y)
+				camPos.x=map.y;
+			else if(camPos.y>=map.y+map.height)
+				camPos.y=map.y.+map.height;
 		}
 
 		super.update(elapsed);
