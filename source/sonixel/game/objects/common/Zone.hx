@@ -12,6 +12,8 @@ import sonixel.game.objects.common.Player;
 import sys.FileSystem;
 import sys.io.File;
 
+import haxe.Json;
+
 /**
  * WIPPPPP
  * -aly ant
@@ -37,7 +39,7 @@ typedef ZoneFile={
 
 class Zone extends FlxTypedSpriteGroup<FlxBasic>
 {
-	public var name:String = 'Test';
+	public var name:String = 'NewZone';
 	public var currentAct:Int = 0;
 	public var playerInitialPosition:FlxPoint = FlxPoint.get(616, 0);
 	public var currentJson:ZoneFile = null;
@@ -47,21 +49,24 @@ class Zone extends FlxTypedSpriteGroup<FlxBasic>
 
 	public var terrains:FlxTypedSpriteGroup<Block>;
 	public var foreground:FlxTypedSpriteGroup<FlxBasic>;
-
+	public var avaliableStages:Array<String> = []; //will check the stages folder
 
 	// when saving the zone file
 	public var terrainsArray:Array<ZoneBlock> = [];
 
-	public function new(zone:String = '', offsetX:Float = 0, offsetY:Float = 0){
+	public function new(zone:String = 'NemZone', offsetX:Float = 0, offsetY:Float = 0){
 		super();
-
-		background = new FlxTypedSpriteGroup<FlxBasic>();
-		add(background);
 
 		clouds = new FlxTypedSpriteGroup<FlxBasic>();
 		add(clouds);
 
-		generateZone();
+		background = new FlxTypedSpriteGroup<FlxBasic>();
+		add(background);
+
+		terrains = new FlxTypedSpriteGroup<FlxBasic>();
+		add(terrains);
+
+		foreground = new FlxTypedSpriteGroup<FlxBasic>();
 	}
 
 	public function generateZone(file:ZoneFile=null, player:Player=null, sidekick:Player=null){
@@ -70,17 +75,30 @@ class Zone extends FlxTypedSpriteGroup<FlxBasic>
 
 		this.playerInitialPosition.x = file.playerIntialPos[0];
 		this.playerInitialPosition.y = file.playerIntialPos[1];
+		this.currentJson = file;
 		if(player!=null){
 			player.x = playerInitialPosition.x;
 			player.y = playerInitialPosition.y;
 		}
 
-		for (data in file.blocks){
-			addBlockToZone(data.type, data.positionX, data.positionX, data.groundSpeed, data.groundAngles)
-		}
+		if (file != null)
+			for (data in file.blocks){
+				addBlockToZone(data.type, data.positionX, data.positionY, data.groundSpeed, data.groundAngles)
+			}
 	}
 	
 	public function addBlockToZone(type:String, posX:Float, posY:Float, groundSpeed:Float, groundAngles:Array<GroundAngles>) {}
 
-	public function saveZoneEntirely() {}
+	public function saveZoneEntirely() {
+		var json = {
+			"name": this.name,
+			"act": this.currentAct,
+			"blocks": this.terrainsArray,
+			"playerIntialPos": [this.playerInitialPosition.x, this.playerIntialPosition.y]
+		};
+		var data = Json.stringify(json, '\t');
+
+		//INEXISTENT FUNCTION FOR A WHILE
+		//Main.saveContent('stages/$name.json', data);
+	}
 }
