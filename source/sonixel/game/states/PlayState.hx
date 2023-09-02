@@ -119,7 +119,7 @@ class PlayState extends FlxState
 			if(camPos.x<=map.y)
 				camPos.x=map.y;
 			else if(camPos.y>=map.y+map.height)
-				camPos.y=map.y.+map.height;
+				camPos.y=map.y+map.height;
 		}
 
 		super.update(elapsed);
