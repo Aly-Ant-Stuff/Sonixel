@@ -50,6 +50,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var gravityForce:Float = 0.21875;
 	public var airAccelerationSpeed:Float = 0.21875;
 	public var jumpForce:Float = 6.5;
+	public var controlLock:Int = 0;
 
 	//actions
 	public var hasLookedUp:Bool = false;
@@ -81,11 +82,16 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		//player general part
 		x += xSpeed;
 		y += ySpeed;
-		if(curGround.groundSpeed > 0)
+		if(curGround.groundSpeed > 0){
 			xSpeed += curGround.groundSpeed;
+			if(spr.animation.curAnim.name =='walk'){
+				spr.animation.curAnim.frameRate = Math.floor(Math.max(0,4 - Math.abs(curGround.groundSpeed)));
+			}
+		}
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			spr.scale.x = -1;
+			spr.animation.play('walk');
 			if (xSpeed > 0) {
 				xSpeed -= decelerationSpeed;
 				if (xSpeed <= 0)
@@ -102,6 +108,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		}
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
 			spr.scale.x = 1;
+			spr.animation.play('walk');
 			if (xSpeed < 0) {
 				xSpeed += decelerationSpeed;
 				if (xSpeed >= 0)
@@ -117,7 +124,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			xSpeed -= Math.min(Math.abs(xSpeed), frictionSpeed) * FlxMath.signOf(xSpeed);
 		}
 
-//  ----- gravity ----- //
+		//  ----- gravity ----- //
 		if (!isGrounded){
 			ySpeed += gravityForce;
 			if (ySpeed >= 16) ySpeed = 16;
