@@ -34,7 +34,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var animationStuff:Array<Dynamic> = [ //name, frames, framerate, loop (true or false)
 		["idle", [0], 12, true],
 		["lookUp", [1,2], 12, false],
-		["goDown", [3, 4], 12, false]
+		["goDown", [3, 4], 12, false],
 	];
 
 	//all the movement stuff
