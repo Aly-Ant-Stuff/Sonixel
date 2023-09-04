@@ -22,4 +22,16 @@ class CoolestUtils {
 
 		return isColliding;
 	}
+
+	public static function indicesIterator(start:Int, end:Int):Array<Int> {
+		var array:Array<Int> = [];
+		for (i in start...end)
+			array.push(i);
+		return array;
+	}
+
+	// matemática foda
+	public static function radToDeg(rad:Float):Float {
+		return rad * 180 / Math.PI;
+ 	}
 }
