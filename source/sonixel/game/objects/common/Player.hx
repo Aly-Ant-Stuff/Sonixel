@@ -140,16 +140,4 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		FlxG.watch.addQuick("velocidade do sonic em x", xSpeed);
 		FlxG.watch.addQuick("velocidade do sonic em y", ySpeed);
 	}
-
-	function indicesIterator(start:Int, end:Int):Array<Int> {
-		var array:Array<Int> = [];
-		for (i in start...end)
-			array.push(i);
-		return array;
-	}
-
-	// matemática foda
-	function radToDeg(rad:Float):Float {
-		return rad * 180 / Math.PI;
- 	}
 }
