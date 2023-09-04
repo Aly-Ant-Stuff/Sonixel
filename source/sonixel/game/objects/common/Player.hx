@@ -85,7 +85,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		if(curGround.groundSpeed > 0){
 			xSpeed += curGround.groundSpeed;
 			if(spr.animation.curAnim.name =='walk'){
-				spr.animation.curAnim.frameRate = Math.floor(Math.max(0,4 - Math.abs(curGround.groundSpeed)));
+				spr.animation.curAnim.frameRate = Math.floor(Math.max(0,4 - Math.abs(xSpeed)));
 			}
 		}
 
