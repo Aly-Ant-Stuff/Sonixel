@@ -107,7 +107,7 @@ class PlayState extends FlxState
 		for (block in map.terrains.members){
 			if (player.isGrounded == CoolestUtils.collisionCheck(player.hitbox, block.topArea)){
 				player.curGround = block;
-				FlxG.log.add('agora voce ta no chao jogador!!!!!!')
+				FlxG.log.add('agora voce ta no chao jogador!!!!!!');
 			}
 		}
 
