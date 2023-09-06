@@ -72,6 +72,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		spr.animation.play("idle");
 		spr.antialiasing = false;
 		add(spr);
+		origin.set(24, 30); //for the go to the center of the sprite
 
 		hitbox = new Hitbox(15, 8, 17, 40, PLAYER);
 		add(hitbox);
