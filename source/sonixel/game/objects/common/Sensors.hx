@@ -16,14 +16,14 @@ class Sensors extends FlxTypedSpriteGroup<FlxBasic>
 		
 	}
 
-	public function createSensor(origin:FlxSprite, x, y, size, color, mode:String):FlxSprite{
+	public function createSensor(x, y, size, color, mode:String):FlxSprite{
 		var result:FlxSprite = new FlxSprite(x,y);
 
 		var width:Int=(mode == 'width' || mode == null ? size : 1);
 		var height:Int=(mode == 'height' ? size : 1);
 
 		/*
-			//HARDCODED BECAUSE IM DUMBASS :sun_glasses:
+			//HARDCODED PORQUE EU TENHO MUITAS CAPACIDADES MENTAIS MUITO LIMITADAS :sun_glasses:
 			switch(mode){
 				case 'horizontal':
 					width = size;
@@ -40,5 +40,6 @@ class Sensors extends FlxTypedSpriteGroup<FlxBasic>
 			add(new FlxSprite(result.x, result.y).makeGraphic(1,1,0xFFffffff));
 			add(new FlxSprite(result.x, result.y+result.height).makeGraphic(1,1,0xFFffffff));
 		}
+		return result;
 	}
 }
