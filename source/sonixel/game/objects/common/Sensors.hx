@@ -23,7 +23,7 @@ class Sensors extends FlxTypedSpriteGroup<FlxBasic>
 		var height:Int=(mode == 'height' ? size : 1);
 
 		/*
-			//HARDCODED PORQUE EU TENHO MUITAS CAPACIDADES MENTAIS MUITO LIMITADAS :sun_glasses:
+			//HARDCODED PORQUE EU TENHO CAPACIDADES MENTAIS MUITO LIMITADAS :sun_glasses:
 			switch(mode){
 				case 'horizontal':
 					width = size;
