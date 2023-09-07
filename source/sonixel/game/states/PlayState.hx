@@ -39,7 +39,6 @@ class PlayState extends FlxState
 		FlxG.camera.follow(camPos, LOCKON, 1);
 
 		map = new Zone();
-		map.generateZone(null, player, null);
 		add(map);
 
 		player = new Player();
@@ -47,6 +46,7 @@ class PlayState extends FlxState
 		FlxG.log.add('initial player y pos: ' +player.y);
 		add(player);
 
+		map.generateZone(null, player, null);
 		add(map.foreground);
 
 		#if android
