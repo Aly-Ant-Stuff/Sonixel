@@ -90,6 +90,8 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			}
 		}
 
+		//if(sensors.sensor.sensorA.x > curGround.terrainHitbox.pixels.x && curGround.terrainHitbox.pixels != 0x00000000)
+
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			spr.scale.x = -1;
 			spr.animation.play('walk');
