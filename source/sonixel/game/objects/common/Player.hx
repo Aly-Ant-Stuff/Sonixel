@@ -34,7 +34,14 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var animationStuff:Array<Dynamic> = [ //name, frames, framerate, loop (true or false)
 		["idle", [0], 12, true],
 		["lookUp", [1,2], 12, false],
-		["goDown", [3, 4], 12, false],
+		["lookDown", [3, 4], 12, false],
+		["lookOnYOUFirstF", [5, 6], 12, false],
+		["lookOnYOU", [7,8,9], 9, true],
+		["chillS", [14,10,11], 12, false],
+		["chill", [12,13], 12, true],
+		["walk", [15,16,17,18,19,20,21,22], 12, true],
+		["run", [23,24,25,26], 12, false],
+		["sonicBall", [27,28,29,30,31], 12, false]
 	];
 
 	//all the movement stuff
@@ -93,7 +100,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		//if(sensors.sensor.sensorA.x > curGround.terrainHitbox.pixels.x && curGround.terrainHitbox.pixels != 0x00000000)
 
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
-			spr.scale.x = -1;
+			spr.flipX = true;
 			spr.animation.play('walk');
 			if (xSpeed > 0) {
 				xSpeed -= decelerationSpeed;
@@ -110,7 +117,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 			}
 		}
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
-			spr.scale.x = 1;
+			spr.flipX = false;
 			spr.animation.play('walk');
 			if (xSpeed < 0) {
 				xSpeed += decelerationSpeed;
