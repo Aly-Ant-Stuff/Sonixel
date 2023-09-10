@@ -149,5 +149,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		FlxG.watch.addQuick("y do sonic", y);
 		FlxG.watch.addQuick("velocidade do sonic em x", xSpeed);
 		FlxG.watch.addQuick("velocidade do sonic em y", ySpeed);
+		if(spr.animation.curAnim.name =='walk')
+			FlxG.watch.addQuick("fps do sonic", spr.animation.curAnim.frameRate);
 	}
 }
