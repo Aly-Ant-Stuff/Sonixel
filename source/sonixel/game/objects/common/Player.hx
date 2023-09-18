@@ -45,8 +45,6 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	];
 
 	//all the movement stuff
-	public var xSpeed:Float = 0;
-	public var ySpeed:Float = 0;
 	public var currentGRDSpeed:Float = 0;
 	public var currentGRDAngle:Float = 0;
 
@@ -68,6 +66,7 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var debugMode:Bool = false;
 
 	//vectorz
+	public var speed:FlxPoint = FlxPoint.get(0,0);
 
 	public function new(x:Float = 0, y:Float = 0, ?char:String)
 	{
@@ -88,12 +87,12 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public function playerUpdate(elapsed:Float)
 	{
 		//player general part
-		x += xSpeed;
-		y += ySpeed;
+		x += speed.x;
+		y += speed.y;
 		if(curGround.groundSpeed > 0){
-			xSpeed += curGround.groundSpeed;
+			speed.x += curGround.groundSpeed;
 			if(spr.animation.curAnim.name =='walk'){
-				spr.animation.curAnim.frameRate = Math.floor(Math.max(0,4 - Math.abs(xSpeed)));
+				spr.animation.curAnim.frameRate = Math.floor(Math.max(0,4 - Math.abs(speed.x)));
 			}
 		}
 
@@ -102,16 +101,16 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		if (FlxG.keys.pressed.LEFT #if android || virtualPad.buttonLeft.pressed #end) {
 			spr.flipX = true;
 			spr.animation.play('walk');
-			if (xSpeed > 0) {
-				xSpeed -= decelerationSpeed;
-				if (xSpeed <= 0)
-					xSpeed = -0.5;
+			if (speed.x > 0) {
+				speed.x -= decelerationSpeed;
+				if (speed.x <= 0)
+					speed.x = -0.5;
 
-			} else if (xSpeed > -topSpeed) {
-				xSpeed -= accelerationSpeed;
-				if (xSpeed <= -topSpeed)
+			} else if (speed.x > -topSpeed) {
+				speed.x -= accelerationSpeed;
+				if (speed.x <= -topSpeed)
 				{
-					xSpeed = -topSpeed;
+					speed.x = -topSpeed;
 					FlxG.log.add('sonic atinguiu a velocide maxima sem nada olha que fo');
 				}
 			}
@@ -119,37 +118,40 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		else if (FlxG.keys.pressed.RIGHT #if android || virtualPad.buttonRight.pressed #end) {
 			spr.flipX = false;
 			spr.animation.play('walk');
-			if (xSpeed < 0) {
-				xSpeed += decelerationSpeed;
-				if (xSpeed >= 0)
-					xSpeed = 0.5;
-			}else if (xSpeed < topSpeed){
-				xSpeed += accelerationSpeed;
-				if (xSpeed >= topSpeed) {
-					xSpeed = topSpeed;
+			if (speed.x < 0) {
+				speed.x += decelerationSpeed;
+				if (speed.x >= 0)
+					speed.x = 0.5;
+			}else if (speed.x < topSpeed){
+				speed.x += accelerationSpeed;
+				if (speed.x >= topSpeed) {
+					speed.x = topSpeed;
 					FlxG.log.add('sonic atinguiu a velocide maxima sem nada olha que fo');
 				}
 			}
 		} else {
-			xSpeed -= Math.min(Math.abs(xSpeed), frictionSpeed) * FlxMath.signOf(xSpeed);
+			speed.x -= Math.min(Math.abs(speed.x), frictionSpeed) * FlxMath.signOf(speed.x);
 		}
 
 		//  ----- gravity ----- //
 		if (!isGrounded){
-			ySpeed += gravityForce;
-			if (ySpeed >= 16) ySpeed = 16;
+			speed.y += gravityForce;
+			if (speed.y >= 16) speed.y = 16;
 		}
 
 		if (FlxG.keys.pressed.SPACE #if android || virtualPad.buttonJump.pressed #end){
-			ySpeed -= jumpForce * Math.sin(currentGRDAngle);
-			xSpeed -= jumpForce * Math.cos(currentGRDAngle);
+			speed.y -= jumpForce * Math.sin(currentGRDAngle);
+			speed.x -= jumpForce * Math.cos(currentGRDAngle);
 		}
 
 		FlxG.watch.addQuick("x do sonic", x);
 		FlxG.watch.addQuick("y do sonic", y);
-		FlxG.watch.addQuick("velocidade do sonic em x", xSpeed);
-		FlxG.watch.addQuick("velocidade do sonic em y", ySpeed);
-		if(spr.animation.curAnim.name =='walk')
-			FlxG.watch.addQuick("fps do sonic", spr.animation.curAnim.frameRate);
+		FlxG.watch.addQuick("velocidade do sonic em x", speed.x);
+		FlxG.watch.addQuick("velocidade do sonic em y", speed.y);
+		FlxG.watch.addQuick("fps do sonic", spr.animation.curAnim.frameRate);
+	}
+
+	public function canMoveNext(player:Player):Bool{
+		
 	}
 }
