@@ -135,8 +135,8 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 
 		//  ----- gravity ----- //
 		if (!isGrounded){
-			speed.y += gravityForce;
-			if (speed.y >= 16) speed.y = 16;
+			while (speed.y < 16) speed.y += gravityForce;
+			//if (speed.y >= 16) speed.y = 16;
 		}
 
 		if (FlxG.keys.pressed.SPACE #if android || virtualPad.buttonJump.pressed #end){
