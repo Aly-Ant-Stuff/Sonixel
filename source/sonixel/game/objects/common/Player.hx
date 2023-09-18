@@ -28,9 +28,6 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 	public var hitbox:Hitbox;
 
 	public var curGround:tilesets.Block = null;
-	#if android
-	public var virtualPad:SonicVPad;
-	#end
 	public var animationStuff:Array<Dynamic> = [ //name, frames, framerate, loop (true or false)
 		["idle", [0], 12, true],
 		["lookUp", [1,2], 12, false],
@@ -43,6 +40,9 @@ class Player extends FlxTypedSpriteGroup<FlxSprite>
 		["run", [23,24,25,26], 12, false],
 		["sonicBall", [27,28,29,30,31], 12, false]
 	];
+	#if android
+	public var virtualPad:SonicVPad;
+	#end
 
 	//all the movement stuff
 	public var currentGRDSpeed:Float = 0;
